@@ -1,0 +1,12 @@
+# Ignore everything in the root directory
+/*
+
+# Re-include .gitignore
+!/.gitignore
+
+# '!' line marks a folder as active
+!/src/
+!/README.md
+
+# Ignore these files and directories
+.DS_Store
