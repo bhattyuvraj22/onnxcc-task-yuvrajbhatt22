@@ -7,6 +7,15 @@
 # '!' line marks a folder as active
 !/src/
 !/README.md
+!/CMakeLists.txt
 
 # Ignore these files and directories
 .DS_Store
+
+build/
+
+*.a
+*.o
+*.obj
+*.bin
+*.onnx

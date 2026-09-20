@@ -1,0 +1,9 @@
+#pragma once
+#include <string_view>
+#define ONNXCC_VERSION "@PROJECT_VERSION@"
+#define ONNXCC_VERSION_CODENAME "@ONNXCC_VERSION_CODENAME@"
+
+namespace onnxcc {
+    std::string_view get_version();
+    std::string_view get_version_codename();
+}
