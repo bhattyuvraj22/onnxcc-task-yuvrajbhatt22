@@ -54,4 +54,21 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(onnx)
 
+set(gtest_forced_shared_crt ON CACHE BOOL "use shared CRT for gtest to avoid conflicts" FORCE)
+set(BUILD_GMOCK OFF CACHE BOOL "Disable gmock for subproject" FORCE)
+set(INSTALL_GTEST OFF CACHE BOOL "Prevent global installation of gtest" FORCE)
+
+FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG v1.15.2
+    GIT_SHALLOW TRUE
+    SYSTEM
+)
+FetchContent_MakeAvailable(googletest)
+
+# should be in the root for project-wide effect
+enable_testing()
+
 add_subdirectory(src)
+add_subdirectory(tests)
