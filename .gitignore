@@ -9,6 +9,7 @@
 !/README.md
 !/CMakeLists.txt
 !/tests/
+!/requirements.txt
 
 # Ignore these files and directories
 .DS_Store
