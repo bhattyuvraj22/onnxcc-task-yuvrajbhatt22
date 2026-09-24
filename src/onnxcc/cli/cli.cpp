@@ -6,10 +6,9 @@ namespace onnxcc::cli {
 
 namespace {
 
-// TODO: parses the "dump" subcommand's own args (everything after argv[1]).
-// Build a cxxopts::Options here with --model, --show-graph, --verbose, and
-// dump's own --help. Look up: options.add_options(), cxxopts::value<T>(),
-// options.parse(argc, argv), and options.help().
+// Parses the "dump" subcommand's own arguments (everything after argv[1]):
+// --model (required), --show-graph and --verbose (boolean flags), and
+// dump's own --help.
 
     ParseResult parse_dump(int argc, char** argv) {
         ParseResult result;
@@ -53,13 +52,9 @@ namespace {
     } //ParseResult parse_dump
 } //namespace
 
-    // TODO:
-    // 1. argc == 1 (no args at all) -> usage to stderr, exit_code != 0
-    // 2. argv[1] == "--help" or "-h" -> top-level usage to stdout, exit_code == 0
-    // 3. argv[1] == "dump" -> return parse_dump(argc, argv)
-    // 4. anything else -> "unknown subcommand: <argv[1]>" to stderr, exit_code != 0
+// Handles the top-level command line: no arguments, --help/-h, dispatching
+// to "dump", or an unrecognized subcommand.
 
-   
     ParseResult parse(int argc, char** argv) {
         ParseResult result;
 
