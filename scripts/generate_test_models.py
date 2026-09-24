@@ -95,6 +95,7 @@ def main() -> None:
 
     print(f"wrote {MODEL_PATH}")
     print(f"  nodes: {len(model.graph.node)}, initializers: {len(model.graph.initializer)}")
+    print(f"  op types: {[node.op_type for node in model.graph.node]}")
     print(f"wrote {INPUT_PATH} ({x.nbytes} bytes, shape {x.shape})")
 
 
