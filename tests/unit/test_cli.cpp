@@ -6,15 +6,9 @@
 
 namespace {
 
-// Builds a fake argv[] from plain strings, so a test can call cli::parse()
-// the same way main() does, without a real command line.
-//
-// Why this needs to be a struct, not a free function returning char**:
-// argv[i] must point at real, mutable char buffers that stay alive for as
-// long as parse() is running. If we just returned a vector<char*> and let
-// the vector<string> it points into go out of scope, every pointer in
-// argv would be dangling. Keeping both vectors together as one object's
-// members means they share the same lifetime automatically.
+// A struct, not a free function, because argv[] must point at storage
+// that outlives the parse() call — keeping both as members ties their
+// lifetimes together and avoids dangling pointers.
 struct FakeArgs {
     std::vector<std::string> storage;
     std::vector<char*> argv;
@@ -30,8 +24,8 @@ struct FakeArgs {
     char** data() { return argv.data(); }
 };
 
-// What one parse() call produced: the struct your own code returns, plus
-// everything that was printed, sorted by which stream it went to.
+// Everything produced by one call to parse(): the ParseResult it returns,
+// plus everything printed, split by which stream it went to.
 struct ParseCapture {
     onnxcc::cli::ParseResult result;
     std::string stdout_text;
@@ -39,7 +33,7 @@ struct ParseCapture {
 };
 
 // Runs cli::parse() with fake command-line args, capturing stdout/stderr
-// so a test can check both WHAT was printed and WHERE it went.
+// so a test can check both what was printed and where it went.
 ParseCapture capture_parse(std::vector<std::string> args) {
     FakeArgs fake(std::move(args));
 
